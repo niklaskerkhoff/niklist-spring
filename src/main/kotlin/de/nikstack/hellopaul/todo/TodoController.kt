@@ -2,6 +2,7 @@ package de.nikstack.hellopaul.todo
 
 import de.nikstack.hellopaul.todo.model.Todo
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/todos")
@@ -13,7 +14,7 @@ class TodoController(val todoService: TodoService) {
     }
 
     @GetMapping("/{todoId}")
-    fun getById(@PathVariable todoId: String): Todo {
+    fun getById(@PathVariable todoId: UUID): Todo {
         return todoService.getById(todoId)
     }
 
@@ -28,7 +29,7 @@ class TodoController(val todoService: TodoService) {
     }
 
     @DeleteMapping("/{todoId}")
-    fun deleteTodo(@PathVariable todoId: String) {
+    fun deleteTodo(@PathVariable todoId: UUID) {
         todoService.deleteTodo(todoId)
     }
 }

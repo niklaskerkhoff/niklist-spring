@@ -3,15 +3,12 @@ version: '3.5'
 services:
   web:
     build:
-      context: ../hello-todos-server
-    restart: always
+      context: hello-todos-server
     container_name: hello-todos-server
-    environment:
-      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
-      POSTGRES_USER: /run/secrets/db-user
-      POSTGRES_DB: niklist
+    restart: always
     secrets:
-      - niklist
+      - db-password
+      - db-user
     networks:
       - traefik
       - default
@@ -25,8 +22,8 @@ services:
     restart: always
     container_name: hello-todo-db
     environment:
+      POSTGRES_USER_FILE: /run/secrets/db-user
       POSTGRES_PASSWORD_FILE: /run/secrets/db-password
-      POSTGRES_USER: /run/secrets/db-user
       POSTGRES_DB: niklist
     secrets:
       - db-password

@@ -13,20 +13,22 @@ class TodoService(val todoRepository: TodoRepository) {
         return todoRepository.findAll()
     }
 
-    fun getById(todoId: String): Todo {
-        return todoRepository.findById(todoId) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+    fun getById(todoId: UUID): Todo {
+        return todoRepository.findById(todoId)
+            .orElseThrow {
+                ResponseStatusException(HttpStatus.NOT_FOUND)
+            }
     }
 
     fun addTodo(todo: Todo): Todo {
-        val newTodo = todo.copy(id = UUID.randomUUID().toString())
-        return todoRepository.addTodo(newTodo) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        return todoRepository.save(todo)
     }
 
     fun updateTodo(todo: Todo): Todo {
-        return todoRepository.updateTodo(todo) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        return todoRepository.save(todo)
     }
 
-    fun deleteTodo(todoId: String) {
-        todoRepository.deleteTodo(todoId)
+    fun deleteTodo(todoId: UUID) {
+        todoRepository.deleteById(todoId)
     }
 }

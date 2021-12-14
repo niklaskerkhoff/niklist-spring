@@ -1,11 +1,11 @@
 spring:
   datasource:
-    username: postgres
-    password: password
-    url: jdbc:postgresql://localhost:5432/niklist
+    username: ${docker-secret-db-user}
+    password: ${docker-secret-db-password}
+    url: jdbc:postgresql://db:5432/niklist
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
