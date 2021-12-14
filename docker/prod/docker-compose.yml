@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  web:
+    build:
+      context: ../hello-todos-server
+    restart: always
+    container_name: hello-todos-server
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
+      POSTGRES_USER: /run/secrets/db-user
+      POSTGRES_DB: niklist
+    secrets:
+      - niklist
+    networks:
+      - traefik
+      - default
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.api_niklist_nikstack_de.rule=Host(`api-niklist.nikstack.de`)'
+      - 'traefik.http.routers.api_niklist_nikstack_de.entrypoints=web,websecure'
+      - 'traefik.http.services.api_niklist_nikstack_de.loadbalancer.server.port=8080'
+  db:
+    image: postgres:14.1-alpine3.15
+    restart: always
+    container_name: hello-todo-db
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
+      POSTGRES_USER: /run/secrets/db-user
+      POSTGRES_DB: niklist
+    secrets:
+      - db-password
+      - db-user
+secrets:
+  db-password:
+    file: secrets/secret-db-password.txt
+  db-user:
+    file: secrets/secret-db-user.txt
+
+networks:
+  traefik:
+    external: true
