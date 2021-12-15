@@ -1,8 +1,6 @@
 spring:
   datasource:
-    username: ${docker-secret-db-user}
-    password: ${docker-secret-db-password}
-    url: jdbc:postgresql://db:5432/niklist
+    url: jdbc:postgresql://hello-todo-db:5432/niklist
   jpa:
     hibernate:
       ddl-auto: update

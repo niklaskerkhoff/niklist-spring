@@ -36,3 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 /docker/prod/secrets/
+/docker/prod/env/

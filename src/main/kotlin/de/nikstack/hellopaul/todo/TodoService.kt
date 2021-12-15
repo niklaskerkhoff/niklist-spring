@@ -21,6 +21,9 @@ class TodoService(val todoRepository: TodoRepository) {
     }
 
     fun addTodo(todo: Todo): Todo {
+        val newTodo = todo.copy<Todo>()
+        println(newTodo.toString())
+
         return todoRepository.save(todo)
     }
 

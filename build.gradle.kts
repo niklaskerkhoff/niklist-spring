@@ -7,7 +7,6 @@ plugins {
     kotlin("plugin.spring") version "1.6.0"
     kotlin("plugin.jpa") version "1.6.0"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.6.10"
-    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 
@@ -40,16 +39,6 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-
-tasks {
-    shadowJar {
-        manifest {
-            attributes(Pair("Main-Class", "de.nikstack.hellopaul.HelloPaulApplicationKt"))
-        }
-    }
-}
-
 allOpen {
     annotation("javax.persistence.Entity")
-    // annotations("com.another.Annotation", "com.third.Annotation")
 }
