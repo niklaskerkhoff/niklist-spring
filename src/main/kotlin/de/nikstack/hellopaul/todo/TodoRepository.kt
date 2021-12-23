@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
 interface TodoRepository : JpaRepository<Todo, UUID> {
+    fun findAllByOrderByTitleAsc()
 }

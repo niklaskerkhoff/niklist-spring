@@ -19,13 +19,13 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.1")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.6.1")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    runtimeOnly("org.postgresql:postgresql")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    runtimeOnly("org.postgresql:postgresql:42.3.1")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.1")
 }
 
 tasks.withType<KotlinCompile> {
